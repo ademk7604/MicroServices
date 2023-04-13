@@ -1,0 +1,14 @@
+server:
+  port: 8098
+
+  # Benim MicroService lerim ve diger discovery Cleint olmasini istedigim service ler discovery server a kendiisni kaydettirecek AMA
+  # discovery server kendi kendisini discovery server a kaydetmesin icin registerWithEureka ve fetchRegistry false cekiyorum. Normalde default da true durlar.
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
