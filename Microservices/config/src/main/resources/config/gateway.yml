@@ -2,3 +2,18 @@ eureka:
   client:
     serviceUrl:
       defaultZone: "http://localhost:8097/eureka"
+
+spring:
+  cloud:
+    gateway:
+      routes:                                 //localhost:8085/reservation =>  http://localhost:8081/ a yonlendiriyor
+        - id: reservationModule
+          uri: http://localhost:8081/
+          predicates:
+            - Path=/reservation/**
+        - id: carModule                       //localhost:8085/car =>  http://localhost:8082/ a yonlendiriyor.
+          uri: http://localhost:8082/
+          predicates:
+            - Path=/car/**
+              
+                                            // Gateway bu sekilde servisler arasinda yonlendirme yapiyor. router gorevi goruyor gateway
