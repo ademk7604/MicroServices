@@ -19,7 +19,7 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Column(nullable = false)
-    private Long carId;
+    private Long carId; // iliski id uzeridnen
 
 
 
