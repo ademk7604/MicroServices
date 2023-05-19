@@ -14,12 +14,20 @@ public class ReservationService {
 
     private ReservationRepository reservationRepository;
 
-    private EurekaClient client; //reservation service bir cleint gibi davranacak!!! tamamen carservice locasyonuun alabilmek icin
+    private EurekaClient eurekaClient; //reservation service bir cleint gibi davranacak!!! tamamen carservice locasyonuun alabilmek icin
+    // birazdan reservation yapilacak arabanin olupolmadigini bu method yoluyla kontrolu yapilacak.
 
-    private RestTemplate restTemplate;
+    private RestTemplate restTemplate; // eurekaClient ve restTemplate ile, kullanacagimiz neseneleri enjekte ettik, simdi kullanacagiz
 
-    public void saveReservayion(Long carId, ReservationRequest reservationRequest){
-        InstanceInfo instanceInfo = client.getApplication("car-service").getInstances().get(0);
+    public void saveReservation(Long carId, ReservationRequest reservationRequest){
+        InstanceInfo instanceInfo = eurekaClient.getApplication("car-service").getInstances().get(0);
+        String beseUrl = instanceInfo.getHomePageUrl(); // discovery uzerinden //localhost:8082
+
+        String path = "/car/";
+
+        //localhost:8082/car/1
+        String servicePath = beseUrl+path+carId.toString();
+
 
     }
 
